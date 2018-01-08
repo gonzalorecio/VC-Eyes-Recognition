@@ -4,8 +4,8 @@ function [ features ] = feature_extraction_eyedetection( I )
 %sumacols = mean(I)- mitjana;
 %sumafiles = mean(I,2)- mitjana;
 %featuresSum = [sumacols sumafiles'];
-features = extractHOGFeatures(I,'CellSize',[8,8],'NumBins',15);
-%featuresLBP = extractLBPFeatures(I,'CellSize',[16,16]);
-%features = [featuresLBP featuresHog];
+featuresHog = extractHOGFeatures(I,'CellSize',[11,11],'NumBins',15);
+featuresLBP = extractLBPFeatures(I,'CellSize',[11,11]);
+features = [featuresLBP featuresHog];
 end
 

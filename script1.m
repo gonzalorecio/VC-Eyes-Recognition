@@ -1,26 +1,30 @@
 %APRENENTATGE%
 % script per llegir les imatges d'un carpeta
-imf = dir('I:\vc\Short Project\*.pgm'); % llista d'imatges amb extensio bmp
-coordf = dir('I:\vc\Short Project\*.eye');
+DIR = '/home/gonzalo/FIB/VC/Project/';
+imf = dir([DIR '*.pgm']);  % llista d'imatges amb extensio bmp
+coordf = dir([DIR '*.eye']);
 n = length(imf); % nombre d'imatges en el directori
 %images = zeros([n,100,100]); % array n imatges de mida 100 x 100
 %Treballem amb un 70% (aprox) dels ulls
 j = 1;
 k = 0;
-sizeFeat = 2940;
+% sizeFeat = 2940+2891;
+% sizeFeat = 2160+2891;
+sizeFeat = 960+1475;
 oUlls = zeros([2*(n-521),sizeFeat]);
 oNoUlls = zeros([18*(n-521),sizeFeat]);
 for i = 1 : n-521
      name = imf(i). name;
+
      namec = coordf(i). name;
-     im = imread(strcat('I:\vc\Short Project\', name));
+     im = imread(strcat(DIR, name));
      s = size(im);
      l = length(s);
      if l == 3 
          im = rgb2gray(im);
      end
-     %Extracció de coordenades
-     [c1,c2,c3,c4] = textread(strcat('I:\vc\Short Project\', namec),'%s %s %s %s');
+     %ExtracciÃ³ de coordenades
+     [c1,c2,c3,c4] = textread(strcat(DIR, namec),'%s %s %s %s');
      lx = str2double(cell2mat(c1(2)));
      ly = str2double(cell2mat(c2(2)));
      rx = str2double(cell2mat(c3(2)));
@@ -34,7 +38,7 @@ for i = 1 : n-521
      %Ara toca generar les 18 imatges no-ull
      for index = 1 : 18
          correcte = 0;
-        %Comprovem si les coordenades són bones
+        %Comprovem si les coordenades sÃ³n bones
         while correcte == 0
             correcte = 1;
             coordfila = randi(286-64);
@@ -52,7 +56,7 @@ for i = 1 : n-521
                 end
             end
         end
-        %Les coordenades són bones un cop aquí
+        %Les coordenades son bones un cop aqui
         coordsret = [coordcolumna coordfila 63 63];
         InoUll = imcrop(im,coordsret);
         InoUllr = imresize(InoUll, [64 64]);
@@ -82,13 +86,13 @@ o2 = zeros([2*521,sizeFeat]);
 for i = 1001 : n
      name = imf(i). name;
      namec = coordf(i). name;
-     im = imread(strcat('I:\vc\Short Project\', name));
+     im = imread(strcat(DIR, name));
      s = size(im);
      l = length(s);
      if l == 3 
          im = rgb2gray(im);
      end
-     [c1,c2,c3,c4] = textread(strcat('I:\vc\Short Project\', namec),'%s %s %s %s');
+     [c1,c2,c3,c4] = textread(strcat(DIR, namec),'%s %s %s %s');
      lx = str2double(cell2mat(c1(2)));
      ly = str2double(cell2mat(c2(2)));
      rx = str2double(cell2mat(c3(2)));
@@ -111,7 +115,7 @@ end
 %predictor = TreeBagger(100,o,c);
 
 %Test
-%o cal obtenir-lo del 30% dels ulls que no hem passat (també podem passar
+%o cal obtenir-lo del 30% dels ulls que no hem passat (tambÃ© podem passar
 %nous no-ulls)
 [C, scores] = predict(predictor,o2);
 predictor.ClassNames
