@@ -121,7 +121,7 @@ lines(numTrees, accuracy, lty=2)
 
 
 
-
+"
 
 ans =
   
@@ -195,42 +195,10 @@ ans =
         
         
         
-    fotu 1
-        
-        scores =
-          
-          0.6200    0.3800
-        0.5800    0.4200
-        0.4100    0.5900
-        0.4800    0.5200
-        0.6100    0.3900
-        0.5100    0.4900
-        0.5500    0.4500
-        0.5500    0.4500
-        0.4500    0.5500
-        0.4800    0.5200
-        0.4300    0.5700
-        0.5400    0.4600
-        0.5700    0.4300
-        0.5800    0.4200
-        0.5600    0.4400
-        0.5600    0.4400
-        0.4900    0.5100
-        0.4800    0.5200
-        0.5900    0.4100
-        0.3900    0.6100
-        
-        
-        ans =
-          
-          90
-        
-        
-        ans =
-          
-          10     2
-           0     8
-        
+    foto 1
+  "   
+      
+         
         
         
         
@@ -333,7 +301,7 @@ accuracy = c(98.62,
              98.69)
 barplot(accuracy,,main="Optimal Value for Upright for LBP feats.",
         names.arg=c("True", "False"),
-        ylim = c(95.0, 100.0),xpd = FALSE)
+        ylim = c(96.0, 100.0),xpd = FALSE)
 lines(signedOrientation,accuracy,lty=2)
 
 
