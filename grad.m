@@ -1,5 +1,6 @@
-I = ulls(:,:,145); %141 114
+I = ulls(:,:,588); %141 114
 I = imadjust(I);
+I = medfilt2(I);
 imshow(I); hold on
 %I  = (I-min(I(:))) ./ (max(I(:)-min(I(:))));
 imshow(I); hold on
@@ -12,15 +13,15 @@ grad(1:25,:) = 0;
 grad(45:end,:) = 0;
 grad(:,1:15) = 0;
 grad(:,50:end) = 0;
-%imshow(grad); hold on
+imshow(grad,[]); hold on
 corners = detectHarrisFeatures(I,'MinQuality', 0.055,'FilterSize',7);
 [featuress, valid_corners] = extractFeatures(I, corners);
-plot(valid_corners);
-size(featuress)
+%plot(valid_corners);
+size(featuress);
 
 feats = zeros([5 64]);
 for i = 1:size(featuress.Features)
-   feats(i,:) = featuress.Features(i,:) 
+   feats(i,:) = featuress.Features(i,:) ;
 end
 
 
@@ -44,5 +45,5 @@ end
 %imshow(uint8(I))
 
 %imshow(imgradient(grad),[])
-
-
+Ig = imfilter(I,fspecial('gaussian',[9 9]))-I;
+imshow(Ig,[])

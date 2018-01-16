@@ -20,7 +20,7 @@ for i = 1 : size(ulls,3)%2*(n-tSize)%2400
     oUllsLook(i,:) = feature_extraction_lookingdetection(I);
 end
 
-predictorLook = TreeBagger(100,oUllsLook,obsMiraTrain);%c);
+predictorLook = TreeBagger(200,oUllsLook,obsMiraTrain);%c);
 
 oUllsLook2 = zeros([2*tSize,sizeFeat]);
 for j = 1 : size(ullstest,3)%tSize*2
@@ -29,7 +29,7 @@ for j = 1 : size(ullstest,3)%tSize*2
 end
 
 [C, scores] = predict(predictorLook,oUllsLook2);
-predictorLook.ClassNames
+%predictorLook.ClassNames
 
 S = scores(:,1)-scores(:,2);
 S(S<=0) = -1;

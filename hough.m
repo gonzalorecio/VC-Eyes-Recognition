@@ -1,4 +1,4 @@
-I = ulls(:,:,141); %141
+I = ulls(:,:,281); %141
 
 imshow(uint8(I))
 
@@ -18,7 +18,7 @@ end
 
 
 
-I = ulls(:,:,83); %141 291  %691
+I = ulls(:,:,482); %141 291  %691
 %1291 1691 21
 %891 ulls tancats
 
@@ -55,7 +55,9 @@ J = uint8(imgradient(I));
 %J(J<max(max(J))/5) = 0;
 %J(J>(4*max(max(J)))/5) = 0;
 imshow((I))
-I = (I-min(I(:))) ./ (max(I(:)-min(I(:))));
+I = imadjust(I)
+I = medfilt2(I)
+%I = (I-min(I(:))) ./ (max(I(:)-min(I(:))));
 [centers,radii] = imfindcircles(I,[5 7], 'ObjectPolarity', 'dark', 'Sensitivity',0.975 )
 %imshow(Ilr)
 for i = 1 : size(centers)
@@ -69,5 +71,6 @@ for i = 1:size(centers,1)
         break
     end
 end
+%imshow(I)
 
 mira

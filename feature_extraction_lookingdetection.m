@@ -13,12 +13,13 @@ function [ features ] = feature_extraction_lookingdetection( I )
 %      end
     
     I = imadjust(I);
+    I = medfilt2(I);
     mcols = mean(I);
     mrows = mean(I,2);
     featuresMean = [mcols mrows'];
     featuresMeanNorm = (featuresMean-min(featuresMean(:))) ./ (max(featuresMean(:)-min(featuresMean(:))));
-    featuresHog = extractHOGFeatures(I,'CellSize',[9,9],'NumBins',15);
-    featuresLBP = extractLBPFeatures(I,'CellSize',[9,9]);
+    featuresHog = extractHOGFeatures(I,'CellSize',[9 9],'NumBins',10, 'BlockSize',[4 4], 'UseSignedOrientation',true);
+    featuresLBP = extractLBPFeatures(I,'NumNeighbors', 12, 'Radius',1,'Upright',false,'CellSize',[12 12]);
     
     
 %     mitjana = sum(sum(I))/(64*64);
@@ -59,7 +60,7 @@ function [ features ] = feature_extraction_lookingdetection( I )
 %     f = (f-min(f(:))) ./ (max(f(:)-min(f(:))));
 %     f(isnan(f))=0;
     
-    features = [featuresHog featuresLBP ];
+    features = [featuresHog];
     
 end
 

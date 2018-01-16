@@ -1,13 +1,21 @@
 i = 1520;
+ii = 10;
 name = imf(i).name;
 
 namec = coordf(i). name;
 Im = imread(strcat(DIR, name));
+DIR2 = '/home/gonzalo/Pictures/Webcam/';
+imf2 = dir([DIR2 '*.jpg']);
+name = imf2(ii).name;
+Im = imread(strcat(DIR2, name));
+Im = rgb2gray(Im);
+Im = imresize(Im, [286 384]);
 
 imshow(Im);
+
 [F, C] = size(Im);
     nf = 0;
-    i = 1;
+    i = 100;
     j = 1;
     while i < F-64
         while j < C-64
@@ -24,8 +32,8 @@ imshow(Im);
                j+32
             end
             nf = nf+n;
-            j = j +10;
+            j = j +5;
         end
         j = 1;
-        i = i+10;
+        i = i+5;
     end
